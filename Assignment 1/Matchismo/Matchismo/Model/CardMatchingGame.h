@@ -21,4 +21,6 @@
 
 @property (readonly, nonatomic)int score;
 
+@property  (readonly, nonatomic)NSString *result;
+
 @end
