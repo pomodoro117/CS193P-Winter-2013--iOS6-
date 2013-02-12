@@ -22,6 +22,12 @@
     return _cards;
 }
 
+- (NSString *)result
+{
+    if(!_result) _result = @"";
+    return _result;
+}
+
 #define MATCH_BONUS 4;
 #define MISMATCH_PENALTY 2;
 #define FLIP_COST 1;

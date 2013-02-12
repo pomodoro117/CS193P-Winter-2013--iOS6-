@@ -37,6 +37,13 @@
     
 }
 
+- (IBAction)dealButtonPressed:(UIButton *)sender {
+    NSLog(@"Deal Button Pressed");
+    self.game = nil;
+    self.flipCount = 0;
+    [self updateUI];
+}
+
 - (void)setFlipCount:(int)flipCount
 {
     _flipCount = flipCount;
