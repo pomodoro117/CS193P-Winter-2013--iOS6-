@@ -23,4 +23,6 @@
 
 @property  (readonly, nonatomic)NSString *result;
 
+@property (nonatomic)NSUInteger matchMode;
+
 @end

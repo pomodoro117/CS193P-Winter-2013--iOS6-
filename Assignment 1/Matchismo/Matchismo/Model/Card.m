@@ -37,7 +37,7 @@
     _unplayable = unplayable;
 }
 
-- (int) match:(NSArray *)otherCards
+- (int) match:(NSArray *)otherCards usingMatchMode:(NSUInteger)matchMode
 {
     int score = 0;
     
@@ -49,6 +49,5 @@
 
     return score;
 }
-
 
 @end

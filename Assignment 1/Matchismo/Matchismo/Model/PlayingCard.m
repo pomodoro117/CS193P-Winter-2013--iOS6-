@@ -10,18 +10,49 @@
 
 @implementation PlayingCard
 
-
-- (int) match:(NSArray *)otherCards
+- (int) match:(NSArray *)otherCards usingMatchMode:(NSUInteger)matchMode
 {
     int score = 0;
-    if ([otherCards count] == 1) {
-        PlayingCard *otherCard = [otherCards lastObject];
-        if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
-        } else if (otherCard.rank == self.rank) {
-            score = 4;
+    if (matchMode == TWO_CARD_MATCH_MODE) {
+        if ([otherCards count] == 1) {
+            PlayingCard *otherCard = [otherCards lastObject];
+            if ([otherCard.suit isEqualToString:self.suit]) {
+                score = 1;
+            } else if (otherCard.rank == self.rank) {
+                score = 4;
+            }
+        }
+    }else if (matchMode == THREE_CARD_MATCH_MODE) {
+        if ([otherCards count] == 2) {
+            PlayingCard *firstOtherCard = [otherCards objectAtIndex:0];
+            PlayingCard *secondOtherCard = [otherCards objectAtIndex:1];
+            
+            if ([firstOtherCard.suit isEqualToString:self.suit] &&
+                [secondOtherCard.suit isEqualToString:self.suit]) {
+                
+                score = 10;
+                
+            } else if ([firstOtherCard.suit isEqualToString:self.suit] ||
+               [secondOtherCard.suit isEqualToString:self.suit] ||
+               [firstOtherCard.suit isEqualToString:secondOtherCard.suit]) {
+                
+                score = 1;
+                
+            } else if (firstOtherCard.rank == self.rank &&
+                       secondOtherCard.rank == self.rank) {
+                
+                score = 40;
+                
+            }else if (firstOtherCard.rank == self.rank ||
+                       secondOtherCard.rank == self.rank ||
+                       firstOtherCard.rank == secondOtherCard.rank) {
+                
+                score = 1;
+                
+            }
         }
     }
+
     return score;
 }
 

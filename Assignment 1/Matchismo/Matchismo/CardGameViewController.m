@@ -15,6 +15,7 @@
 @property (nonatomic) int flipCount;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *matchModeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 @end
@@ -37,10 +38,17 @@
     
 }
 
+- (IBAction)matchModeSegmentedControlPressed:(id)sender {
+    NSLog(@"matchMode= %d", self.matchModeSegmentedControl.selectedSegmentIndex);
+    [self.game setMatchMode:self.matchModeSegmentedControl.selectedSegmentIndex];
+}
+
 - (IBAction)dealButtonPressed:(UIButton *)sender {
     NSLog(@"Deal Button Pressed");
     self.game = nil;
     self.flipCount = 0;
+    self.matchModeSegmentedControl.enabled = YES;
+    self.matchModeSegmentedControl.selectedSegmentIndex = 0;
     [self updateUI];
 }
 
@@ -68,6 +76,9 @@
 - (IBAction)flipCard:(UIButton *)sender {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
+    if (self.flipCount > 0) {
+        self.matchModeSegmentedControl.enabled = NO;
+    }
     [self updateUI];
 }
 

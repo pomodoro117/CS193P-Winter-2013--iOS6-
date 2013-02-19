@@ -15,6 +15,8 @@
 @property (nonatomic, getter = isFaceUp) BOOL faceUp;
 @property (nonatomic, getter = isUnplayable) BOOL unplayable;
 
-- (int) match:(NSArray *)otherCards;
+#define TWO_CARD_MATCH_MODE 0
+#define THREE_CARD_MATCH_MODE 1
+- (int) match:(NSArray *)otherCards usingMatchMode:(NSUInteger)matchMode;
 
 @end

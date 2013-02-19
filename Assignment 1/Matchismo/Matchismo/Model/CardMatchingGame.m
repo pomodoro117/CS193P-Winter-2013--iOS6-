@@ -31,6 +31,8 @@
 #define MATCH_BONUS 4;
 #define MISMATCH_PENALTY 2;
 #define FLIP_COST 1;
+#define THREE_CARD_MATCH_MODE_PENALTY 10;
+#define THREE_CARD_MATCH_MODE_FLIP_COST 5;
 
 - (void)flipCardAtIndex:(NSUInteger)index
 {
@@ -41,27 +43,62 @@
             
             self.result = [NSString stringWithFormat:@"Flipped up %@", card.contents];
             
-            for (Card *otherCards in self.cards) {
-                if (otherCards.isFaceUp && !otherCards.isUnplayable) {
-                    int matchScore = [card match:@[otherCards]];
+            if (self.matchMode == TWO_CARD_MATCH_MODE) {
+                for (Card *otherCards in self.cards) {
+                    if (otherCards.isFaceUp && !otherCards.isUnplayable) {
+                        int matchScore = [card match:@[otherCards] usingMatchMode:self.matchMode];
+                        if (matchScore) {
+                            card.unplayable = YES;
+                            otherCards.unplayable = YES;
+                            int point = matchScore * MATCH_BONUS;
+                            self.score += point;
+                            self.result = [NSString stringWithFormat:@"Matched %@ & %@ for %d points", card.contents, otherCards.contents, point];
+                        }else {
+                            otherCards.faceUp = NO;
+                            int point = MISMATCH_PENALTY;
+                            self.score -= point;
+                            self.result = [NSString stringWithFormat:@"%@ & %@ don't match! %d point penalty!", card.contents, otherCards.contents, point];
+                        }
+                        break;
+                    }
+                    
+                }
+                
+                self.score -= FLIP_COST;
+
+            } else if (self.matchMode == THREE_CARD_MATCH_MODE) {
+                NSMutableArray *matchCards = [[NSMutableArray alloc] init];
+                for (Card *oterCards in self.cards) {
+                    if (oterCards.isFaceUp && !oterCards.isUnplayable) {
+                        [matchCards addObject:oterCards];
+                    }
+                }
+                if ([matchCards count] > 1) {
+                    NSLog(@"THREE_CARD_MATCH_MODE");
+                    int matchScore = [card match:matchCards usingMatchMode:self.matchMode];
                     if (matchScore) {
                         card.unplayable = YES;
-                        otherCards.unplayable = YES;
+                        for (Card *card in matchCards) {
+                            card.unplayable = YES;
+                        }
+
                         int point = matchScore * MATCH_BONUS;
                         self.score += point;
-                        self.result = [NSString stringWithFormat:@"Matched %@ & %@ for %d points", card.contents, otherCards.contents, point];
+                        self.result = [NSString stringWithFormat:@"Matched %@ & %@ & %@ for %d points", card.contents, [[matchCards objectAtIndex:0] contents], [[matchCards objectAtIndex:1] contents], point];
                     }else {
-                        otherCards.faceUp = NO;
+                        for (Card *card in matchCards) {
+                            card.faceUp = NO;
+                        }
                         int point = MISMATCH_PENALTY;
-                        self.score -= point;
-                        self.result = [NSString stringWithFormat:@"%@ & %@ don't match! %d point penalty!", card.contents, otherCards.contents, point];
+                        point *= THREE_CARD_MATCH_MODE_PENALTY;
+                        self.score -= point ;
+                        self.result = [NSString stringWithFormat:@"%@ & %@ & %@ don't match! %d point penalty!", card.contents, [[matchCards objectAtIndex:0] contents], [[matchCards objectAtIndex:1] contents], point];
                     }
-                    break;
                 }
+                
+                self.score -= THREE_CARD_MATCH_MODE_FLIP_COST;
 
             }
-            self.score -= FLIP_COST;
-            
             
         }
         card.faceUp = !card.isFaceUp;
