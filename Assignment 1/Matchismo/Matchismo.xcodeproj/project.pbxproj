@@ -12,6 +12,7 @@
 		229C96AE16C9385500481BB5 /* Deck.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C96A716C9385500481BB5 /* Deck.m */; };
 		229C96AF16C9385500481BB5 /* PlayingCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C96A916C9385500481BB5 /* PlayingCard.m */; };
 		229C96B016C9385500481BB5 /* PlayingCardDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C96AB16C9385500481BB5 /* PlayingCardDeck.m */; };
+		22E5832516D525ED006A14B2 /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = 22E5832416D525ED006A14B2 /* cardback.png */; };
 		22F90C3216C93760002DAB50 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F90C3116C93760002DAB50 /* UIKit.framework */; };
 		22F90C3416C93760002DAB50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F90C3316C93760002DAB50 /* Foundation.framework */; };
 		22F90C3616C93760002DAB50 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F90C3516C93760002DAB50 /* CoreGraphics.framework */; };
@@ -36,6 +37,7 @@
 		229C96A916C9385500481BB5 /* PlayingCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCard.m; sourceTree = "<group>"; };
 		229C96AA16C9385500481BB5 /* PlayingCardDeck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingCardDeck.h; sourceTree = "<group>"; };
 		229C96AB16C9385500481BB5 /* PlayingCardDeck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingCardDeck.m; sourceTree = "<group>"; };
+		22E5832416D525ED006A14B2 /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
 		22F90C2D16C93760002DAB50 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F90C3116C93760002DAB50 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22F90C3316C93760002DAB50 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -143,6 +145,7 @@
 		22F90C3816C93760002DAB50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				22E5832416D525ED006A14B2 /* cardback.png */,
 				22F90C4016C93760002DAB50 /* CardGameAppDelegate.h */,
 				22F90C4116C93760002DAB50 /* CardGameAppDelegate.m */,
 				22F90C3916C93760002DAB50 /* Matchismo-Info.plist */,
@@ -213,6 +216,7 @@
 				22F90C4616C93760002DAB50 /* Default@2x.png in Resources */,
 				22F90C4816C93760002DAB50 /* Default-568h@2x.png in Resources */,
 				22F90C4B16C93760002DAB50 /* MainStoryboard.storyboard in Resources */,
+				22E5832516D525ED006A14B2 /* cardback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

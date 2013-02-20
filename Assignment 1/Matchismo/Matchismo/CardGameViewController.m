@@ -65,6 +65,12 @@
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
         [cardButton setTitle:card.contents forState:UIControlStateSelected|UIControlStateDisabled];
+        UIImage *cardImage = [UIImage imageNamed:@"cardback.png"];
+        [cardButton setImage:cardImage forState:UIControlStateNormal];
+        cardButton.imageEdgeInsets = UIEdgeInsetsFromString(@"{3.0,3.0,3.0,3.0}");
+        UIImage *blankImage = [[UIImage alloc] init];
+        [cardButton setImage:blankImage forState:UIControlStateSelected];
+        [cardButton setImage:blankImage forState:UIControlStateSelected|UIControlStateDisabled];
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
