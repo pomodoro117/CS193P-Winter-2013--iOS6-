@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *matchModeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
+@property (weak, nonatomic) IBOutlet UISlider *historySlider;
 @end
 
 @implementation CardGameViewController
@@ -38,6 +39,23 @@
     
 }
 
+- (void)setHistorySlider:(UISlider *)historySlider
+{
+    _historySlider = historySlider;
+    _historySlider.maximumValue = 10.0;
+    _historySlider.minimumValue = 1.0;
+}
+
+- (IBAction)historySliderValueChanged:(id)sender {
+    if (self.historySlider.value > [self.game.resultArray count]) {
+        self.historySlider.value = [self.game.resultArray count];
+    }
+    NSUInteger sliderValue = floorf(self.historySlider.value);
+    NSLog(@"sliderValue is %d", sliderValue);
+    self.resultLabel.text = [NSString stringWithFormat:@"%@", [self.game.resultArray objectAtIndex:sliderValue - 1]];
+    self.resultLabel.alpha = (sliderValue == [self.game.resultArray count]) ? 1.0 : 0.3;
+}
+
 - (IBAction)matchModeSegmentedControlPressed:(id)sender {
     NSLog(@"matchMode= %d", self.matchModeSegmentedControl.selectedSegmentIndex);
     [self.game setMatchMode:self.matchModeSegmentedControl.selectedSegmentIndex];
@@ -47,6 +65,7 @@
     NSLog(@"Deal Button Pressed");
     self.game = nil;
     self.flipCount = 0;
+    self.historySlider.value = 0.0;
     self.matchModeSegmentedControl.enabled = YES;
     self.matchModeSegmentedControl.selectedSegmentIndex = 0;
     [self updateUI];
@@ -74,9 +93,11 @@
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
-        self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-        self.resultLabel.text = [NSString stringWithFormat:@"%@", self.game.result];
     }
+    self.historySlider.value = [self.game.resultArray count];
+    self.resultLabel.alpha = 1.0;
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    self.resultLabel.text = [NSString stringWithFormat:@"%@", [self.game.resultArray lastObject] ? [self.game.resultArray lastObject] : @""];
 }
 
 - (IBAction)flipCard:(UIButton *)sender {

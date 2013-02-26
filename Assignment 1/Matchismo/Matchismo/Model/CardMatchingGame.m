@@ -11,7 +11,8 @@
 @interface CardMatchingGame ()
 @property (readwrite, nonatomic)int score;
 @property (strong, nonatomic) NSMutableArray *cards; //of Card
-@property (readwrite, nonatomic)NSString *result; // of the last flip
+@property (readwrite, nonatomic)NSString *result; //of the Last Flip
+@property (readwrite, nonatomic)NSMutableArray *resultArray; //of Result;
 @end
 
 @implementation CardMatchingGame
@@ -26,6 +27,15 @@
 {
     if(!_result) _result = @"";
     return _result;
+}
+
+- (NSArray *)resultArray
+{
+    if(!_resultArray) {
+        _resultArray = [[NSMutableArray alloc] init];
+        [_resultArray addObject:@""];
+    }
+    return _resultArray;
 }
 
 #define MATCH_BONUS 4;
@@ -98,6 +108,10 @@
                 
                 self.score -= THREE_CARD_MATCH_MODE_FLIP_COST;
 
+            }
+            [self.resultArray addObject:self.result];
+            if ([self.resultArray count] > 10) {
+                [self.resultArray removeObjectAtIndex:0];
             }
             
         }

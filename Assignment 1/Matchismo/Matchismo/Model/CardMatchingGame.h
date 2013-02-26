@@ -25,4 +25,6 @@
 
 @property (nonatomic)NSUInteger matchMode;
 
+@property (readonly, nonatomic)NSMutableArray *resultArray;
+
 @end
