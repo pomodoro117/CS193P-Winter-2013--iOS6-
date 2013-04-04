@@ -112,11 +112,11 @@
                 self.score -= THREE_CARD_MATCH_MODE_FLIP_COST;
 
             }
-            [self.resultArray addObject:self.result];
-            if ([self.resultArray count] > 10) {
-                [self.resultArray removeObjectAtIndex:0];
-            }
             
+        }
+        [self.resultArray addObject:self.result];
+        if ([self.resultArray count] > 10) {
+            [self.resultArray removeObjectAtIndex:0];
         }
         card.faceUp = !card.isFaceUp;
     }
