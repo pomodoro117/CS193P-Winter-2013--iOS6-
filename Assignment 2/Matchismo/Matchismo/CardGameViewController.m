@@ -71,6 +71,14 @@
     [self.game setMatchMode:self.matchModeSegmentedControl.selectedSegmentIndex];
 }
 
+- (void)setMatchMode:(NSNumber *)matchMode {
+    if ([matchMode integerValue] == TWO_CARD_MATCH_MODE) {
+        [self.game setMatchMode:TWO_CARD_MATCH_MODE];
+    } else if ([matchMode integerValue] == THREE_CARD_MATCH_MODE){
+        [self.game setMatchMode:THREE_CARD_MATCH_MODE];
+    }
+}
+
 - (IBAction)dealButtonPressed:(UIButton *)sender {
     NSLog(@"Deal Button Pressed");
     self.game = nil;

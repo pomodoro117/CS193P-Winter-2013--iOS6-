@@ -10,4 +10,6 @@
 
 @interface CardGameViewController : UIViewController
 
+- (void)setMatchMode:(NSNumber *)matchMode;
+
 @end

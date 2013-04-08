@@ -7,6 +7,7 @@
 //
 
 #import "SetGameViewController.h"
+#import "Card.h"
 
 @interface SetGameViewController ()
 
@@ -19,20 +20,26 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self setup];
     }
     return self;
+}
+
+- (void) setup
+{
+    // Initialization that can't wait untill viewDidLoad
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self setMatchMode:[NSNumber numberWithInt:THREE_CARD_MATCH_MODE]];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewWillAppear:animated];
 }
 
 @end
